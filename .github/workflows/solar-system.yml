@@ -30,6 +30,11 @@ jobs:
               uses: actions/Setup-node@v4
               with:
                 node-version: ${{matrix.nodejs_version}}
+            - name: Cache npm depedency
+              uses: actions/cache@v4
+              with:
+                path: node_modules
+                key: ${{runner.os}}-node-modules-${{hashFiles('package-lock.json')}}
             - name: Install Dependency
               run: npm install
             - name: Unit Testing
@@ -57,6 +62,12 @@ jobs:
               uses: actions/Setup-node@v4
               with:
                 node-version: ${{matrix.nodejs_version}}
+            
+            - name: Cache npm depedency
+              uses: actions/cache@v4
+              with:
+                path: node_modules
+                key: ${{runner.os}}-node-modules-${{hashFiles('package-lock.json')}}
 
             - name: Install Dependency
               run: npm install
