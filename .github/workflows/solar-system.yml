@@ -84,6 +84,8 @@ jobs:
     Docker:
         name: Containerization
         needs: [unit-testing,code-coverage]
+        permissions: 
+          packages: write
         strategy:
           matrix:
             nodejs_version: [18]
