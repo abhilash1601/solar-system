@@ -59,6 +59,19 @@ jobs:
 
     code-coverage:
         name: Code Coverege #r
+        container: 
+          image: node:18
+
+        services:
+          mongo-db:
+            image: siddharth67/mongo-db:non-prod
+            options: 
+              --name mongo
+        env:
+          MONGO_URI: 'mongodb://mongo:27017/superData'
+          MONGO_USERNAME: non-prod-user
+          MONGO_PASSWORD: non-prod-password
+
         strategy:
           matrix:
             nodejs_version: [18]
@@ -67,10 +80,10 @@ jobs:
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v4
-            - name: Setup Node JS Version -${{matrix.nodejs_version}}
-              uses: actions/Setup-node@v4
-              with:
-                node-version: ${{matrix.nodejs_version}}
+            # - name: Setup Node JS Version -${{matrix.nodejs_version}}
+            #   uses: actions/Setup-node@v4
+            #   with:
+            #     node-version: ${{matrix.nodejs_version}}
             
             - name: Cache npm depedency
               uses: actions/cache@v4
